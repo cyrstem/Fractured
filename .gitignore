@@ -1,0 +1,18 @@
+#compiled sources#
+GPATH
+GRTAGS
+GTAGS
+#FOLDERS#
+.vscode/*
+obj/*
+#files#
+*.jpg
+*.png
+*.tiff
+*.qbs
+*.mp4
+*.mp3
+*.svg
+of_vscode.sh
+config.make
+Makefile
