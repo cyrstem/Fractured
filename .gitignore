@@ -16,3 +16,4 @@ obj/*
 of_vscode.sh
 config.make
 Makefile
+*.so
