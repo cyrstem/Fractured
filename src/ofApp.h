@@ -12,7 +12,7 @@ public:
 	void keyPressed(int key);
 	void windowResized(int w, int h);
 	ofxAutoReloadedShader shader, glitch, blockss;
-	ofFbo fbo fbo2;
+	ofFbo fbo, fbo2;
 	ofImage img;
 	vector<glm::vec3> y_noise;
 	bool change;

@@ -50,31 +50,31 @@ float noise (in vec2 st) {
 
 
 float box(in vec2 _st, in vec2 _size){
-    _size = vec2(0.5) - _size*0.5;
+    _size = vec2(0.5) - _size*.5;
     vec2 uv = smoothstep(_size,
-                        _size+vec2(0.001),
+                        _size+vec2(0.1),
                         _st);
     uv *= smoothstep(_size,
-                    _size+vec2(0.001),
+                    _size+vec2(0.1),
                     vec2(1.0)-_st);
     return uv.x*uv.y;
 }
  
 void main() {
    vec2 st = gl_FragCoord.xy/u_resolution.xy;
-   // st.y = 1.-st.y; // invert y to draw normally per openFrameworks
+    //st.y = 2.-st.y; // invert y to draw normally per openFrameworks
 	  st = u_resolution; // de-normalize coords
   //modifica tan  to cos different aproach 
     vec2 translate = scale( vec2(cos(u_time)) ) *st;
-    st += translate *1000.05;
+    st -= translate *10.5;
     vec2 ipos = floor(st);
     vec2 fpos = fract(st);
   //last value change for 1 to 100 more distorcion 
-  float drift = cos(u_time) / random(ipos)*100;
+  float drift = sin(u_time) / random(ipos)*10;
 
   float r = texture(u_tex0, vec2(gl_FragCoord.x - drift + y_noise[int(gl_FragCoord.y)].r, (u_resolution.y + gl_FragCoord.y))).r;
-  float g = texture(u_tex0, vec2(gl_FragCoord.x + drift - y_noise[int(gl_FragCoord.y)].g, (u_resolution.y - gl_FragCoord.y))).g;
-  float b = texture(u_tex0, vec2(gl_FragCoord.x - drift / y_noise[int(gl_FragCoord.y)].b, (u_resolution.y - gl_FragCoord.y))).b;
+  float g = texture(u_tex0, vec2(gl_FragCoord.x + drift - y_noise[int(gl_FragCoord.y)].g, (u_resolution.y + gl_FragCoord.y))).g;
+  float b = texture(u_tex0, vec2(gl_FragCoord.x - drift / y_noise[int(gl_FragCoord.y)].b, (u_resolution.y + gl_FragCoord.y))).b;
 
 
 vec2 pos = vec2(st* random(fpos));
