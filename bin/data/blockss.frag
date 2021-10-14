@@ -14,7 +14,7 @@ float uvrand(vec2 uv)
 
 void main()
 {
-  vec2 offs = vec2(u_resolution.x - u_resolution.y, 1) / 4;
+  vec2 offs = vec2(u_resolution.x - u_resolution.y, 8) / 2;
   vec2 p = (gl_FragCoord.xy - offs) / u_resolution.y;
   vec2 ro = vec2(-1.5,-5.5); // rect origin
   vec2 rw = vec2(5.5, 5.5); // rect extent (half width)
@@ -23,20 +23,20 @@ void main()
    
   float t = floor(u_time);
 
-    for (int i = 0; i < 16; i++)
+    for (int i = 0; i <=90; i++)
     {
-        if (uvrand(ro.xy +  t) < .05 * i) break;
+        if (uvrand(ro.xy +  t) < .005 * i) break;
         rw *= 0.8;
         ro += rw * (step(ro, p) * 2 - 1);
     }
 
     float rnd = uvrand(ro);
 
-    vec2 sl = rnd < 0.8 ? vec2(1,0) : vec2(1,1); // sliding param
-    sl *= 4 * rw * (1 - smoothstep(1.005, 1, fract(u_time)));
+    vec2 sl = rnd < 0.9 ? vec2(1,0) : vec2(1,1); // sliding param
+    sl *= 4 * rw * (1 - smoothstep(5.05, 1, fract(u_time)));
 
     
-    vec2 cp = (abs(rw - p + ro) - sl) * u_resolution.y - 15; // rect fill
+    vec2 cp = (abs(rw + p + ro) - sl) * u_resolution.y - 105; // rect fill
     vec4  masks = texture (u_tex0, cp);
 
     //float c = clamp(min(1, 1), 0.5, 0.5);

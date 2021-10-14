@@ -6,7 +6,7 @@ void ofApp::setup() {
     ofSetWindowTitle("FractureD");
     ofBackground(ofColor::black);
     ofSetWindowShape(1200, 720);
-    //ofSetFrameRate(24);
+
 
     img.load("I-Break-Horses.jpg");
     img.resize(img.getWidth(), img.getHeight());
@@ -58,12 +58,9 @@ void ofApp::draw() {
     glitch.end();
 
 
-    // shader.begin();
-    // shader.setUniform1f("u_time", ofGetElapsedTimef());
-    // shader.setUniform2f("u_resolution", img.getWidth(), img.getHeight());
-    // shader.setUniformTexture("u_tex0", fbo2.getTexture(), 1);
+
     fbo2.draw(0, 0);
-    //shader.end();
+
 
 }
 
@@ -78,7 +75,17 @@ void ofApp::keyPressed(int key) {
     }
 
 }
+//--------------------------------------------------------------
+void ofApp::dragEvent(ofDragInfo info) {
+    if (info.files.size() > 0)
+    {
+        dragPt = info.position;
+        images.assign(info.files.size(), ofImage());
+        ofLog() << images.size();
 
+    }
+
+}
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h) {
     fbo.allocate(w, h);
