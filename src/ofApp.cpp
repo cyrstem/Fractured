@@ -8,8 +8,8 @@ void ofApp::setup() {
     ofSetWindowShape(1200, 720);
 
 
-    img.load("I-Break-Horses.jpg");
-    img.resize(img.getWidth(), img.getHeight());
+    img.load("Dune.jpg");
+    img.resize(img.getWidth() * 2, img.getHeight() * 2);
     shader.load("shader");
     glitch.load("blockss");
 
@@ -27,6 +27,8 @@ void ofApp::setup() {
     b.internalformat = GL_RGBA;
     b.useStencil = true;
     fbo2.allocate(b);
+    gui.setup(nullptr, true, ImGuiConfigFlags_None, true);
+
 
 }
 
@@ -60,7 +62,11 @@ void ofApp::draw() {
 
 
     fbo2.draw(0, 0);
-
+    gui.begin();
+    ImGui::Begin("Fractured");
+    ImGui::Checkbox("Draw lines", &fullScreen);
+    ImGui::End();
+    gui.end();
 
 }
 
@@ -89,4 +95,5 @@ void ofApp::dragEvent(ofDragInfo info) {
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h) {
     fbo.allocate(w, h);
+    fbo2.allocate(w, h);
 }

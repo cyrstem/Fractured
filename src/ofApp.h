@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxAutoReloadedShader.h"
+#include "ofxImGui.h"
 
 class ofApp : public ofBaseApp {
 
@@ -20,4 +21,8 @@ public:
 	bool change;
 	vector<ofImage>images;
 	glm::vec2 dragPt;
+private:
+	ofxImGui::Gui gui;
+	bool fullScreen = false;
+
 };
